@@ -1,1 +1,6 @@
-rootProject.name = 'intra'
+rootProject.name = 'highthon'
+include 'common'
+include 'd-day-api'
+include 'back-office'
+include 'registration'
+
