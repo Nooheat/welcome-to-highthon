@@ -1,5 +1,6 @@
 package kr.highthon.common.domain;
 
+import kr.highthon.common.exception.AlreadyPaidException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -28,15 +30,25 @@ public class Registration {
     @Column(nullable = false)
     private Boolean paid;
 
+    @Column(insertable = false)
+    private LocalDateTime payDate;
+
+    @Column(nullable = false)
+    private Integer age;
+
     @Builder
-    public Registration(String userId, String name, String email, String phoneNum, Boolean paid) {
-        if (userId == null || email == null) {
-            throw new IllegalArgumentException("userId나 email은 null이 될 수 없습니다.");
-        }
+    private Registration(String userId, String name, String email, String phoneNum, Integer age) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;
-        this.paid = paid;
+        this.age = age;
+        this.paid = false;
+    }
+
+    public void pay() {
+        if (this.paid) throw new AlreadyPaidException();
+        this.paid = true;
+        this.payDate = LocalDateTime.now();
     }
 }

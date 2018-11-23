@@ -17,7 +17,7 @@ class RegistrationRepositoryTest extends Specification {
                 .email("sample-email")
                 .phoneNum("010-0000-1111")
                 .name("윤찬명")
-                .paid(false)
+                .age(19)
                 .build()
         when:
         registrationRepository.save(registration)

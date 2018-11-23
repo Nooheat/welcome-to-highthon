@@ -2,17 +2,33 @@ package kr.highthon.common.domain
 
 import spock.lang.Specification
 
-class RegistrationTest extends Specification {
+import java.time.LocalDateTime
 
-    def "Registration - userId나 email이 null일 수 없다."() {
-        when:
-        Registration.builder()
+class RegistrationTest extends Specification {
+    private Registration registration
+
+    def setup() {
+        registration = Registration.builder()
+                .userId("user-id")
+                .email("sample-email")
                 .phoneNum("010-0000-1111")
                 .name("윤찬명")
-                .paid(false)
+                .age(19)
                 .build()
+    }
+
+    def '결제 확인시 결제 시간 또한 현재 시간으로 변경되어야한다.'() {
+
+        given:
+        def dateTimeBeforePay = LocalDateTime.now().minusSeconds(1)
+
+        when:
+        registration.pay()
+        def payDate = registration.getPayDate()
 
         then:
-        thrown IllegalArgumentException
+        dateTimeBeforePay < payDate
+        payDate < LocalDateTime.now().plusSeconds(1)
     }
+
 }

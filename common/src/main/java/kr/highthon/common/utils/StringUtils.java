@@ -10,4 +10,7 @@ public class StringUtils {
         }
         return builder.toString();
     }
+
+    private StringUtils() {
+    }
 }
