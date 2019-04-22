@@ -1,11 +1,9 @@
-package kr.highthon.registration;
+package kr.highthon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {
-        "kr.highthon.common.domain"
-})
+@SpringBootApplication
 public class RegistrationApplication {
 
     public static void main(String[] args) {
