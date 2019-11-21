@@ -10,7 +10,6 @@ public class DemoController {
     @GetMapping("/")
     public Registration getAnyRegistration() {
         return Registration.builder()
-                .userId("Hello It's BackOffice demo registration object")
                 .build();
     }
 

@@ -13,7 +13,6 @@ class RegistrationRepositoryTest extends Specification {
 
     def "RegistrationRepository - 저장 테스트"() {
         def registration = Registration.builder()
-                .userId("user-id")
                 .email("sample-email")
                 .phoneNum("010-0000-1111")
                 .name("윤찬명")

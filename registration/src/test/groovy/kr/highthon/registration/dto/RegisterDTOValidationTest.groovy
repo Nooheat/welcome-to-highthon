@@ -9,52 +9,52 @@ class RegisterDTOValidationTest extends ValidationTest {
 
     def '이름은 null또는 공백이 될 수 없다.'() {
         expect:
-        violations == validate(name, EMAIL, PHONE_NUM, AGE)
+        passed == (validate(name, EMAIL, PHONE_NUM, AGE) == 0)
 
         where:
-        name  | violations
-        null  | 1
-        ""    | 1
-        "윤찬명" | 0
+        name  | passed
+        null  | false
+        ""    | false
+        "윤찬명" | true
     }
 
     def '이메일은 형식이 맞는 문자열이어야하고, null 또는 공백이 될 수 없다.'() {
         expect:
-        violations == validate(NAME, email, PHONE_NUM, AGE)
+        passed == (validate(NAME, email, PHONE_NUM, AGE) == 0)
 
         where:
-        email                   | violations
-        null                    | 1
-        ""                      | 1
-        "not an email format"   | 1
-        "nooheat1228@gmail.com" | 0
+        email                   | passed
+        null                    | false
+        ""                      | false
+        "not an email format"   | false
+        "nooheat1228@gmail.com" | true
     }
 
     def '전화번호는 000-0000-0000 형식이어야하고, null 또는 공백이 될 수 없다.'() {
         expect:
-        violations == validate(NAME, EMAIL, phoneNum, AGE)
+        passed == (validate(NAME, EMAIL, phoneNum, AGE) == 0)
 
         where:
-        phoneNum        | violations
-        null            | 1
-        ""              | 1
-        "an string"     | 1
-        "01000000000"   | 1
-        "010-0000-0000" | 0
+        phoneNum        | passed
+        null            | false
+        ""              | false
+        "an string"     | false
+        "01000000000"   | false
+        "010-0000-0000" | true
     }
 
     def '연령은 14세 이상 20세 이하여야한다. null이 될 수 없다.'() {
         expect:
-        violations == validate(NAME, EMAIL, PHONE_NUM, age)
+        passed == (validate(NAME, EMAIL, PHONE_NUM, age) == 0)
 
 
         where:
-        age  | violations
-        null | 1
-        13   | 1
-        14   | 0
-        20   | 0
-        21   | 1
+        age  | passed
+        null | false
+        13   | false
+        14   | true
+        20   | true
+        21   | false
     }
 
     def 'toEntity()는 Registration과 1대1로 완전히 변환되어야한다.'() {

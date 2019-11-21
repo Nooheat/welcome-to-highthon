@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,7 +14,8 @@ import java.time.LocalDateTime;
 public class Registration {
 
     @Id
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long registrationId;
 
     @Column(length = 30, nullable = false)
     private String name;
@@ -37,8 +36,7 @@ public class Registration {
     private Integer age;
 
     @Builder
-    private Registration(String userId, String name, String email, String phoneNum, Integer age) {
-        this.userId = userId;
+    private Registration(String name, String email, String phoneNum, Integer age) {
         this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;

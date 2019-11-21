@@ -10,7 +10,6 @@ public class DDayDemoController {
     @GetMapping("/")
     public Registration getAnyRegistration() {
         return Registration.builder()
-                .userId("Hello It's D-Day demo registration object")
                 .build();
     }
 }
